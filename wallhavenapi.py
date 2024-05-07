@@ -193,13 +193,13 @@ class WallhavenApiV1:
                 Purity.nsfw in purities)
 
         if sorting is not None:
-            params["sorting"] = sorting.value
+            params["sorting"] = sorting
 
         if order is not None:
-            params["order"] = order.value
+            params["order"] = order
 
         if top_range is not None:
-            params["topRange"] = top_range.value
+            params["topRange"] = top_range
 
         if atleast is not None:
             params["atleast"] = "{}x{}".format(atleast[0], atleast[1])
@@ -213,7 +213,7 @@ class WallhavenApiV1:
                 for x in (ratios if type(ratios) is list else [ratios])])
         
         if colors is not None:
-            params["colors"] = colors.value
+            params["colors"] = colors
 
         if page is not None:
             params["page"] = str(page)
@@ -228,10 +228,6 @@ class WallhavenApiV1:
 
     def is_walpaper_exists(self, wallpaper_id):
         return "error" not in self.wallpaper(wallpaper_id)
-
-    def download_walpaper(self, *args, **kwargs):
-        logging.warning('Please use "download_wallpaper" method instead "download_walpaper"')
-        return self.download_wallpaper(*args, **kwargs)
 
     def download_wallpaper(self, wallpaper_id, file_path, chunk_size=4096):
         wallpaper_data = self.wallpaper(wallpaper_id)
